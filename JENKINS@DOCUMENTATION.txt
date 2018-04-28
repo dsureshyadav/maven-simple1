@@ -1,0 +1,163 @@
+                        JENKINS
+====================================
+STEP 1: INSTALL JAVA8 ON CENTOS FROM GOOGLE SEARCH  from it
+cmds are 1) cd /opt/
+        2)wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz"
+        3)tar xzf jdk-8u161-linux-x64.tar.gz
+4)cd /opt/jdk1.8.0_161/
+5)alternatives --install /usr/bin/java java /opt/jdk1.8.0_161/bin/java 2
+6)alternatives --config java
+
+7) + 2           /opt/jdk1.8.0_45/bin/java
+               enter 2
+then only
+
+java installed in your meachine check version java --version
+
+STEP 2: yum updates -y then yum needto install jenkins from jenkins.io ->downloads-centos->run these cmds 
+1)sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+2)sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+
+ yum install jenkins
+jenkins is installed in your meachine
+
+3)service jenkins start
+4)service jenkins status 
+
+ STEP 3:
+======== COPY THE IP ADDRESS OF AWS MEACHINE AND PASTE IN BROWSER PORT NO :8080 AND ENTER IT
+YOU WILL GET UNLOCKS JENKINS OPEN IT THERE CMD IS cat /var/lib/jenkins/secrets/initialAdminpwd copy it and paste in jenkins unlock 
+automatically you will go to jenkins server
+ and set up your own user name and pwd will create.
+
+
+               JENKINS JOB OR PROJECT
+=============================================
+STEP 1: NEW ITEM =ANY NAME
+   free syle project -select
+and will comes general   sourcecodemgmt   build triggers  build environment  build  post-build actions
+                :
+                the project is parameteraise in that add parameters (choice paramete credintial param etc )
+save & apply
+project is ready
+
+STEP 2: SELECT -BUILD NOW build is success
+STEP 3: GO TO CONSOLE OUTPUT
+    SEE THE PATH 
+WHERE WE ARE IN WORKSPACE AND CHECK IN JENKINS SERVER 
+CD /WORKSPACE/JOB 0R PROJECTNAME
+
+SUCCESS
+
+AND SAME AS GIT
+============
+  STEP1 :GIT HUB ACCOUNT GLONE COPY AND PASTE IN JENKINS CONSOLE 
+SELECT CONFIGURE-> ADD GIT HUB REPOSITORY AND 
+CLICK ON BUILD NOW
+STEP 2:CHECK IN JENKINS SERVER
+ IF IT WILL THE FILES ARE COME SUCCESS IT OTHERWISE YOU NEED TO INSTALL GIT
+
+STEP 3: I WANT TO CREATE USER GO TO MANAGE JENKIS ->MANAGE USERS AND CREATE USER
+ THEN WHO WANT TO ACCESS THIS GO TO MANAGEJENKINS ->CONFIGURE GLOBAL SECURITY->INTHAT BYDEFAULT SELECT JENKIS USER DATABASE UNDER THIS SELECT ALLOW USERS TO SIGNUP IT IS 
+UNDER TAB ACCESS CONTROL
+
+NEXT AUTHORISATION
+===============
+SELECT MATRIX BASEDSECURITY-> YOU CAN ADD YOUR USER/GROUP NAME TO ACCESS THIS AUTHENTICATION
+
+HERE AUTHENTICATION AND ACCESS CONTROL IS DONE
+
+
+
+                                   HOW TO BUILD MAVEN IN JENKINS STEPS
+============================================================================
+STEP 1: INSTALL MAVEN PLUGINS IN CONSOLE FOR THIS GO TO MANAGE JENKINS ->MANAGE PLUGIN -> AVAILABLE TAB -> SEARCH MAVEN INTEGRATION IN THAT YOU SELECT INSTALL WITHOUT RESTART
+MAVEN INSTALLED SUCCESSFULLY IN GUI CONSOLE
+
+STEP 2: AND SAME AS IN JENKINS SERVER MEANS CMD CONTROLL
+ FOR THIS GO TO MAVEN CENTOS IN GOOGLE SEARCH AND  INTHAT FROM STEP2 TO STEP 4: YOU CAN EXECUTE ALL THOSE CMDS AFTER CHECK MVN -VERSION IF IT WILL SHOW IT IS SUCCESS
+OTHERWISE NO.
+
+ 
+  I NEED TO CONFIGURE JAVA PATH AND MAVEN PATH IN JENKINS GUI CONSOLE
+==============================================================================
+FOR THIS 
+STEP 1: GO TO MANAGE JENKINS =>GLOBAL TOOL CONFIGURATION ADD JDK -> JAVA NAME - ANY NAME
+                                                                    JAVA HOME- JAVA PATH WHAT YOU INSTALLED  IN JENKINS SERVER
+                                                                    MAVAN NAME - ANY NAME
+                                                                    MAVAN HOME -MAVAN PATH
+GOTO "HELLO WORLD WAR GIT FILE" TO SEARCH IN GOOGLE AND COPY THE CLONE IT AND PASTE IN JENKINS GUI CONSOLE IN GIT REPOSITORY AND 
+
+SELECT BUILD PERIODICALLY IN LINUX (CRON JOB CMD EXECUTES) FOR EVERY MIN(15) EVERY HOUR(*) EVERY MONTH(*) EVERY DAY(*) YOU TYPE IN BUILD PERIODICALLY THEN 
+APPLY AND SAVE IT 
+TO SEE THE PATH IN JENKINS SERVER
+
+THAT CRON JOB IS DONE.
+
+SAME AS MAVEN PROJECT BY THROUGH WEBHOOKS VIA TOMCAT
+=======================================================
+FOR THIS TOMCAT YOU HAVE TO DO FIRST
+ STEP1: TOMCAT INSTALLATION BY GIVING RAMIREDDY DOCUMENTATION FOLLOW THOSE STEPS AS IT AS.
+
+STEP 2:CD BIN FOLDER ./START.SH   --CHMOD 777 ./START.SH FOR PERMISSION AND ./SHUTDOWN.SH SAME AS CHMOD 777 ./SHTDOWN.SH
+CHMOD 777 ./CATALINA.HOME 
+FINALLY ./START.SH START
+GO TO BROWSER give the ipaddress:8081
+tomcat started then go to manage app->here give the credintial and uname :admin  pwd: admin
+
+
+TAKE ONE EXAMPLE OF HELLOWORLD MAVEN SIMPLE IN GOOGLE AND 
+
+YOU CAN IMPORT FROM YOUR GIT HUB ACCOUNT AND THEN 
+POM.XML MODIFIED AND COMMITTED IT 
+THEN GO TO COPY THE ADDRESS GIVE IN JENKINS GIT AND SELECT ON GITHUB HOOK SCM POLLING THEN SAVE IT
+
+FINALLY IT WILL AUTOMATICALLY BUILD AND DEPLOY TO THE CONSOLE OUTPUT BY THROUGH WEBHOOKS.
+
+COMPLETED.
+
+
+JENKINS WITH JROG ARTIFACTORY
+===============================
+Take one new instance
+
+GOTO OFFICIAL SITE JFROG.COM/OPENSOURCE-->download zip file and get it by winscp to your linux system and unzip it
+
+cd bin
+ls
+run the cmd sh artifactoryctl start
+tomcat stated
+go to the browser http://given ipaddress:8081(default port no)
+
+it will open and setup admin credentials uname :admin
+                                         pwd:password1
+goto localrepository->select on maven project and give the name
+
+now go to jenkins server -> manage plugins ->available->search artifactory ->install it.- > and come to project ->configure ->postbuld actions->deploy to artifactory
+
+finnow jenkins home->manageplugins ->configure system-> find add arifactory servers-> server id ->any name 
+                                                                                      URL ->//artifactory ip address :8081
+                                                                                       UNAME : admin	
+                                                                                      password:password1
+
+delivery to maven artifactory : include :**/*.war
+build it
+automatically it will updated here.
+
+completed jfrog
+=====================
+
+jenkins with cli and u want operate also from jenkins api 
+==========================================================
+
+FOR TEST QUALITY PURPOSE YOU WILL USE SONAR CUBE (SIR GIVEN URL FROM THERE GET IT AND PRACTICE IT)
+====================================================================================================
+
+DELIVERY PIPELINE
+=================================
+
+STEP 3
+
+  
+                
